@@ -7,10 +7,11 @@ echo "NICK $nick" > $config
 echo "USER $user" >> $config
 echo "JOIN #$channel" >> $config
 
-tail -f $config | telnet $server 6667 | while read res;
+tail -f $config | telnet $server 6667 | while read res
 do
   # do things when you see output
   case "$res" in
+    # respond to ping requests from the server
     PING*)
       echo "$res" | sed "s/PING/PONG/" >> $config 
     ;;
@@ -18,14 +19,17 @@ do
     *"You have not"*)
       echo "JOIN #$channel" >> $config
     ;;
+    # run when someone joins
     *JOIN*)
       who=$(echo "$res" | sed -r "s/:(.*)\!.*@.*/\1/")
       if [ "$who" = "$nick" ]
       then
        continue 
       fi
-      echo "PRIVMSG #$channel :Welcome $who" >> $config
+      echo "PRIVMSG #$channel :Welcome $who, have some op :)" >> $config
+      echo "MODE #$channel +o $who" >> $config
     ;;
+    # run when a message is seen
     *PRIVMSG*)
       echo "$res"
       who=$(echo "$res" | sed -r "s/:(.*)\!.*@.*/\1/")
