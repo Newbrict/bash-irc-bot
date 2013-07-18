@@ -26,14 +26,13 @@ do
       then
        continue 
       fi
-      echo "PRIVMSG #$channel :Welcome $who, have some op :)" >> $config
       echo "MODE #$channel +o $who" >> $config
     ;;
     # run when a message is seen
     *PRIVMSG*)
       echo "$res"
       who=$(echo "$res" | sed -r "s/:(.*)\!.*@.*/\1/")
-      from=$(echo "$res" | sed -r "s/.*PRIVMSG ([#]?[a-zA-Z]*) :.*/\1/")
+      from=$(echo "$res" | sed -r "s/.*PRIVMSG ([#]?([a-zA-Z]|\-)*) :.*/\1/")
       # "#" would mean it's a channel
       if [ "$(echo "$from" | grep '#')" ]
       then
