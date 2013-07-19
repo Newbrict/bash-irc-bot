@@ -1,54 +1,53 @@
-# !/bin/bash
-# @author Dimitar Dimitrov
+#!/bin/bash
 
 . bot.properties
-config=".bot.cfg"
-echo "NICK $nick" > $config 
-echo "USER $user" >> $config
-echo "JOIN #$channel" >> $config
+input=".bot.cfg"
+echo "NICK $nick" > $input 
+echo "USER $user" >> $input
+echo "JOIN #$channel" >> $input
 
-tail -f $config | telnet $server 6667 | while read res
+tail -f $input | telnet $server 6667 | while read res
 do
   # do things when you see output
   case "$res" in
     # respond to ping requests from the server
     PING*)
-      echo "$res" | sed "s/PING/PONG/" >> $config 
+      echo "$res" | sed "s/I/O/" >> $input 
     ;;
     # for pings on nick/user
     *"You have not"*)
-      echo "JOIN #$channel" >> $config
+      echo "JOIN #$channel" >> $input
     ;;
     # run when someone joins
     *JOIN*)
-      who=$(echo "$res" | sed -r "s/:(.*)\!.*@.*/\1/")
+      who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
       if [ "$who" = "$nick" ]
       then
        continue 
       fi
-      echo "MODE #$channel +o $who" >> $config
+      echo "MODE #$channel +o $who" >> $input
     ;;
     # run when a message is seen
     *PRIVMSG*)
       echo "$res"
-      who=$(echo "$res" | sed -r "s/:(.*)\!.*@.*/\1/")
-      from=$(echo "$res" | sed -r "s/.*PRIVMSG ([#]?([a-zA-Z]|\-)*) :.*/\1/")
+      who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
+      from=$(echo "$res" | perl -pe "s/.*PRIVMSG (.*[#]?([a-zA-Z]|\-)*) :.*/\1/")
       # "#" would mean it's a channel
       if [ "$(echo "$from" | grep '#')" ]
       then
         test "$(echo "$res" | grep ":$nick:")" || continue
-        will=$(echo "$res" | sed -r "s/.*:$nick:(.*)/\1/")
+        will=$(echo "$res" | perl -pe "s/.*:$nick:(.*)/\1/")
       else
-        will=$(echo "$res" | sed -r "s/.*$nick :(.*)/\1/")
+        will=$(echo "$res" | perl -pe "s/.*$nick :(.*)/\1/")
         from=$who
       fi
       com=$(echo "$will" | grep -Eio "[a-z]*" | head -n1 | tail -n1)
       if [ -z "$(ls modules/ | grep -i -- "$com.sh")" ]
       then
-        ./modules/help.sh $who $from >> $config
+        ./modules/help.sh $who $from >> $input
         continue
       fi
-      ./modules/$com.sh $who $from $(echo "$will" | tail -n+1) >> $config
+      ./modules/$com.sh $who $from $(echo "$will" | cut -d " " -f3-99) >> $input
     ;;
     *)
       echo "$res"
