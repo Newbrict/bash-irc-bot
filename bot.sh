@@ -42,7 +42,7 @@ do
         from=$who
       fi
       com=$(echo "$will" | grep -Eio "[a-z]*" | head -n1 | tail -n1)
-      if [ -z "$(ls modules/ | grep -i -- "$com.sh")" ]
+      if [ -z "$(ls modules/*.sh | grep -i -- "$com.sh")" ]
       then
         ./modules/help.sh $who $from >> $input
         continue
