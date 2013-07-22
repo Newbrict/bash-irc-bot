@@ -1,4 +1,7 @@
 #! /bin/sh
+#  Simple Question-Answering module
+#  author Vy Nguyen
+#
 
 arg1=$1 # sender (the person I am talking to)
 arg2=$2 # unclear????
