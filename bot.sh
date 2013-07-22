@@ -41,7 +41,7 @@ do
         will=$(echo "$res" | perl -pe "s/.*$nick :(.*)/\1/")
         from=$who
       fi
-      com=$(echo "$will" | grep -Eio "[a-z]*" | head -n1 | tail -n1)
+      com=$(echo "$will" | cut -d " " -f 2)
       if [ -z "$(ls modules/ | grep -i -- "$com.sh")" ]
       then
         ./modules/help.sh $who $from >> $input
