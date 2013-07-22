@@ -4,7 +4,7 @@
 #
 
 arg1=$1 # sender (the person I am talking to)
-arg2=$2 # unclear????
+arg2=$2 # channel
 
 user_dir=modules/talk/logs/$1
 if [ ! -d "$user_dir" ]; then
