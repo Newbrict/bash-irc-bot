@@ -2,12 +2,15 @@
 
 . bot.properties
 input=".bot.cfg"
+echo "Starting session: $(date "+[%y:%m:%d %T]")">$log 
 echo "NICK $nick" > $input 
 echo "USER $user" >> $input
 echo "JOIN #$channel" >> $input
 
 tail -f $input | telnet $server 6667 | while read res
 do
+  # log the session
+  echo "$(date "+[%y:%m:%d %T]")$res" >> $log
   # do things when you see output
   case "$res" in
     # respond to ping requests from the server
@@ -42,7 +45,6 @@ do
       fi
       will=$(echo "$will" | perl -pe "s/^ //")
       com=$(echo "$will" | cut -d " " -f1)
-      echo "COM:$com"
       if [ -z "$(ls modules/ | grep -i -- "$com.sh")" ]
       then
         ./modules/help.sh $who $from >> $input
