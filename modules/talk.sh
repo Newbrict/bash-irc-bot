@@ -17,7 +17,7 @@ if [ -f "$user_dir/GOODBYE" ]; then
     rm $user_dir/GOODBYE
 fi
 
-shift 3  # chop off the first two args
+shift 2  # chop off the first two args
 echo "$@" >> $user_dir/input
 cat $user_dir/input | java -jar modules/talk/talk_bot.jar > $user_dir/output
 
@@ -26,7 +26,7 @@ retcode="${PIPESTATUS[1]}"
 
 echo "PRIVMSG $arg2 :$arg1: `tail -n 1 $user_dir/output`"
 
-if [ $retcode -eq "1" ]; then
+if [ "$retcode" -eq "1" ]; then
     echo "PRIVMSG $arg2 :$arg1: That was a joke! It's free to talk to me. But we do accept donations! ;D"
     # clean up old conversations
     stamp="`date +%s`"
