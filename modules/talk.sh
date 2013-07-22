@@ -3,7 +3,7 @@
 arg1=$1 # sender (the person I am talking to)
 arg2=$2 # unclear????
 
-user_dir=eliza_bot/$1
+user_dir=modules/talk/logs/$1
 if [ ! -d "$user_dir" ]; then
     mkdir $user_dir
 fi
@@ -14,9 +14,9 @@ if [ -f "$user_dir/GOODBYE" ]; then
     rm $user_dir/GOODBYE
 fi
 
-shift 2  # chop off the first two args
+shift 3  # chop off the first two args
 echo "$@" >> $user_dir/input
-cat $user_dir/input | java -jar eliza_bot/eliza_java.jar > $user_dir/output
+cat $user_dir/input | java -jar modules/talk/talk_bot.jar > $user_dir/output
 
 # retcode of value 1 means the user said goodbye
 retcode="${PIPESTATUS[1]}"
