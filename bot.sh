@@ -19,8 +19,7 @@ do
       echo "JOIN #$channel" >> $input
     ;;
     # run when someone joins
-    *JOIN*)
-      who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
+    *JOIN*) who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
       if [ "$who" = "$nick" ]
       then
        continue 
