@@ -47,7 +47,7 @@ do
         ./modules/help.sh $who $from >> $input
         continue
       fi
-      ./modules/$com.sh $who $from $(echo "$will" | cut -d " " -f3-99) >> $input
+      ./modules/$com.sh $who $from $(echo "$will" | cut -d " " -f2-99) >> $input
     ;;
     *)
       echo "$res"
