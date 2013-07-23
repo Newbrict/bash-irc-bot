@@ -1,7 +1,20 @@
 #!/bin/bash
 
-. "../../bot.properties"
-log="../../$log"
+versionString="azhu® version 2.0.1 by Andrew DiMarco"
+
+if [ $# == 3 ]; then
+	if [ $3 == "--version" ]; then
+		echo $versionString
+		exit
+	fi
+elif [ $# == 1 ]; then
+	if [ $1 == "--version" ]; then
+		echo $versionString
+		exit
+	fi
+fi
+
+. "bot.properties"
 
 lines=$(grep "!azhu" $log)
 name=$(echo $lines | sed "s/.*\]:\(.*\)![^!]*/\1/g")
@@ -23,7 +36,6 @@ if [ "$daysApart" -eq 0 ]; then
 
 	minutesBetween=$(((10#$hour - 10#$lastResponse_hour)*60 + 10#$minute - 10#$lastResponse_minute))
 fi
-
 
 responsePercent=0
 if [ $minutesBetween -ge 0	 ]; then
