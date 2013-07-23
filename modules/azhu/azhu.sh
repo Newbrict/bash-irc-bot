@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. "../bot.properties"
-log="../$log"
+. "../../bot.properties"
+log="../../$log"
 
 lines=$(grep "!azhu" $log)
 name=$(echo $lines | sed "s/.*\]:\(.*\)![^!]*/\1/g")
@@ -26,7 +26,7 @@ fi
 
 
 responsePercent=0
-if [ "$minutesBetween" -ge 0 ]; then
+if [ $minutesBetween -ge 0	 ]; then
 	responsePercent=$(( -5000/($minutesBetween+40) - $minutesBetween/25 + 100 ))
 fi
 
