@@ -1,9 +1,27 @@
 package eliza;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.joda.time.DateTime;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 public class Utils
 {
     private static final String digits = "0123456789";
- 
+    
     public static int count(String str, char c)
     {
         int count = 0;
@@ -190,4 +208,41 @@ public class Utils
         // TODO: unreachable
         return s;
     }
+    
+    
+    public static String getCurrentWeather()
+    {
+        try
+        {
+            URL json = new URL(weather);
+          
+          JSONObject jsonObj = (JSONObject) JSONValue.parse(new InputStreamReader(json.openStream()));
+          
+          String temp = ((JSONObject)jsonObj.get("current_observation")).get("temperature_string").toString();
+          String w = ((JSONObject)jsonObj.get("current_observation")).get("weather").toString();
+          String loc = ((JSONObject)((JSONObject)jsonObj.get("current_observation")).get("display_location")).get("full").toString();
+          
+          return temp + ", " + w + " in " + loc;
+        }
+        catch (MalformedURLException ex)
+        {
+            //
+            return "<UNKNOWN>";
+        }
+        catch (IOException e)
+        {
+            return "<UNKNOWN>";
+        }
+    }
+    
+    public static void main(String[] args) throws MalformedURLException, ParserConfigurationException, IOException
+    {
+        
+        
+        System.out.println(getCurrentWeather());
+        
+
+    }
+    
+    private static final String weather = "http://api.wunderground.com/api/de13f2e6a2c425f6/conditions/q/MA/Newton.json";
 }

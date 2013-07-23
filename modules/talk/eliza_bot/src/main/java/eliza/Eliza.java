@@ -3,6 +3,7 @@ package eliza;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -302,6 +303,11 @@ public class Eliza
             else if ("DATE".equalsIgnoreCase(lines[0].trim()))
             {
                 return "It is " + new DateTime().toString("dd-MM-YYY") + ", but you should start getting your own calendar!";
+            }
+            else if ("WEATHER".equalsIgnoreCase(lines[0].trim()))
+            {
+             
+               return Utils.getCurrentWeather();
             }
             else 
             {

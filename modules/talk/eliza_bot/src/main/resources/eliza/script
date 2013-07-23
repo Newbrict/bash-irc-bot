@@ -274,7 +274,16 @@ key: i
     response: Can you elaborate on that ?
     response: Do you say (1) for some special reason ?
     response: That's quite interesting.
+key: weather
+  decomposition: *
+    response: makeQuery WEATHER
 key: you
+  decomposition: * have the time *
+    response: makeQuery TIME
+  decomposition: * know what time it is *
+    response: makeQuery TIME 
+  decomposition: * know what date it is *
+    response: makeQuery DATE
   decomposition: * who @create you *
     response: I was taught to reason and speak by vy
   decomposition: * where are you from *
@@ -354,6 +363,12 @@ key: who
   decomposition: * who are you *
     response: I am a bot trained to entertain bored people.
 key: what
+  decomposition: * how is the weather *
+    response: makeQuery WEATHER
+  decomposition: * what is the weather *
+    response: makeQuery WEATHER
+decomposition: * what is the weather like *
+    response: makeQuery WEATHER
   decomposition: * what time is it *
     response: makeQuery TIME
   decomposition: * what date *

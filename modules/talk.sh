@@ -17,7 +17,7 @@ if [ -f "$user_dir/GOODBYE" ]; then
     rm $user_dir/GOODBYE
 fi
 
-shift 3  # chop off the first three args, as we only want the mesage 
+shift 2  # chop off the first three args, as we only want the mesage 
 echo "$@" >> $user_dir/input
 cat $user_dir/input | java -jar modules/talk/talk_bot.jar > $user_dir/output
 
