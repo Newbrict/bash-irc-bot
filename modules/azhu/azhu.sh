@@ -4,7 +4,7 @@ versionString="azhu® version 2.0.1 by Andrew DiMarco"
 
 if [ $# == 3 ]; then
 	if [ $3 == "--version" ]; then
-		echo $versionString
+		echo "PRIVMSG $2 :$1: "$versionString
 		exit
 	fi
 elif [ $# == 1 ]; then
