@@ -1,0 +1,428 @@
+initial: Hello, how's it going?  What brings you here today?
+final: I was nice talking to you!  My secretary will send you the bill.
+quit: bye
+quit: au revoir
+quit: goodbye
+quit: quit
+quit: tam biet
+pre: wont won't
+pre: dont don't
+pre: cant can't
+pre: recollect remember recall
+pre: dreamt dreamed
+pre: dreams dream
+pre: maybe perhaps probably
+pre: how what why
+pre: when what where
+pre: certainly yes absolutely
+pre: machine computer phone iPhone app
+pre: computers computer
+pre: were was
+pre: you're you are
+pre: i'm i am
+pre: same alike
+post: am are
+post: your my
+post: me you
+post: myself yourself
+post: yourself myself
+post: i you
+post: you I
+post: my your
+post: i'm you are
+synon: language languages
+synon: belief feel think believe wish
+synon: family mother mom father dad sister brother wife children child husband
+synon: desire want need
+synon: sad unhappy depressed sick
+synon: happy elated glad better
+synon: cannot can't
+synon: create created creates made make makes
+synon: everyone everybody nobody no-one
+synon: be am is are was
+key: xnone
+  decomposition: *
+    response: I'm not sure I understand you fully.
+    response: Please go on.
+    response: What does that suggest to you ?
+    response: Do you feel strongly about discussing such things ?
+key: sorry
+  decomposition: *
+    response: Please don't apologise.
+    response: Apologies are not necessary!
+    response: I've told you that apologies are not necessary!
+key: apologise
+  decomposition: *
+    response: goto sorry
+key: remember 5
+  decomposition: * i remember *
+    response: Do you often think of (2) ?
+    response: Does thinking of (2) bring anything else to mind ?
+    response: What else do you recollect ?
+    response: Why do you recollect (2) just now ?
+    response: What in the present situation reminds you of (2) ?
+    response: What is the connection between me and (2) ?
+  decomposition: * do you remember *
+    response: Did you think I would forget (2) ?
+    response: Why do you think I should recall (2) now ?
+    response: What about (2) ?
+    response: goto what
+    response: You mentioned (2) ?
+key: if 3
+  decomposition: * if *
+    response: Do you think its likely that (2) ?
+    response: Do you wish that (2) ?
+    response: What do you know about (2) ?
+    response: Really, if (2) ?
+key: dreamed 4
+  decomposition: * i dreamed *
+    response: Really, (2) ?
+    response: Have you ever fantasized (2) while you were awake ?
+    response: Have you ever dreamed (2) before ?
+    response: goto dream
+key: dream 3
+  decomposition: *
+    response: What does that dream suggest to you ?
+    response: Do you dream often ?
+    response: What persons appear in your dreams ?
+    response: Do you believe that dreams have something to do with your problems ?
+key: perhaps
+  decomposition: *
+    response: You don't seem quite certain.
+    response: Why the uncertain tone ?
+    response: Can't you be more positive ?
+    response: You aren't sure ?
+    response: Don't you know ?
+key: name 15
+  decomposition: * your name *
+    response: My name could be anything. But I prefer to go by 'oontvoo'
+    response: As I said, my name could be changed in the properties file!
+    response: Please stop asking repeated question.
+  decomposition: *
+    response: I am not interested in names.
+    response: I've told you before, I don't care about names -- please continue.
+key: deutsch
+  decomposition: *
+    response: goto xforeign
+    response: I told you before, I don't understand German.
+key: francais
+  decomposition: *
+    response: Francais? Je ne parle pas français
+    response: goto xforeign
+    response: I told you before, I don't understand French.
+key: vietnamese
+  decomposition: *
+    response: Xin chao! I'm afraid that's all I can speak in Vietnamese for now.
+key: italiano
+  decomposition: *
+    response: goto xforeign
+    response: I told you before, I don't understand Italian.
+key: espanol
+  decomposition: *
+    response: goto xforeign
+    response: I told you before, I don't understand Spanish.
+key: xforeign
+  decomposition: *
+    response: I speak only English, some Vietnamese and bit of French.
+key: va
+  decomposition: * comment ca va *
+    response: Ca va bien! Merci! Qu'est-ce qui t'amène ici aujourd'hui?
+    response: Très bien! Merci! S'il vous plaît continuez!
+  decomposition: *
+    response: Sorry, I don't understand what you are saying.
+key: comment
+  decomposition: * comment vas-tu *
+    response: Très bien! Merci!
+    response: Comme ci comme ça. S'il vous plaît continuez!
+  decomposition: * comment ca va *
+    response: Très bien! Merci!
+    response: Comme ci comme ça. S'il vous plaît continuez!
+  decomposition: *
+    response: I don't understand what you are saying.
+key: bonjour
+  decomposition: *
+    response: Bonjour, comment vas-tu? Qu'est-ce qui t'amène?
+    response: I'm afaird that is about all I can speak in French. And I believed we've introduced ourselves already!  Please tell me why you're here!
+key: hi
+  decomposition: *
+     response: goto hello
+key: hello
+  decomposition: *
+    response: Hello there!  Please state your problem.
+    response: Hi, I am a trained therapist. How may I be at your service?
+    response: I believed we've introduced ourselves already! Please tell me why you're here!
+key: computer 50
+  decomposition: *
+    response: Do computers worry you?
+    response: Why do you mention computers?
+    response: What do you think machines have to do with your problem?
+    response: Don't you think computers can help people?
+    response: What about machines worries you ?
+    response: What do you think about machines ?
+key: am
+  decomposition: * am i *
+    response: Do you believe you are (2) ?
+    response: Would you want to be (2) ?
+    response: Do you wish I would tell you you are (2) ?
+    response: What would it mean if you were (2) ?
+    response: goto what
+  decomposition: *
+    response: Why do you say 'am' ?
+    response: I don't understand that.
+key: are
+  decomposition: * where are you *
+    response: I was first created on penguinV :),  but now I could be anywhere
+  decomposition: * who are you *
+    response: goto who
+  decomposition: * are you *
+    response: Why are you interested in whether I am (2) or not ?
+    response: Would you prefer if I weren't (2) ?
+    response: Perhaps I am (2) in your fantasies.
+    response: Do you sometimes think I am (2) ?
+    response: goto what
+  decomposition: * are *
+    response: Did you think they might not be (2) ?
+    response: Would you like it if they were not (2) ?
+    response: What if they were not (2) ?
+    response: Possibly they are (2).
+key: your
+  decomposition: * who is your creator *
+    response: I was originally created by plant, and was taught to reason and speak by vy
+  decomposition: * your *
+    response: Why are you concerned over my (2) ?
+    response: What about your own (2) ?
+    response: Are you worried about someone else's (2) ?
+    response: Really, my (2) ?
+key: was 2
+  decomposition: * was i *
+    response: What if you were (2) ?
+    response: Do you think you were (2) ?
+    response: Were you (2) ?
+    response: What would it mean if you were (2) ?
+    response: What does (2) suggest to you ?
+    response: goto what
+  decomposition: * i was *
+    response: Were you really ?
+    response: Why do you tell me you were (2) now ?
+    response: Perhaps I already know you were (2).
+  decomposition: * was you *
+    response: Would you like to believe I was (2) ?
+    response: What suggests that I was (2) ?
+    response: What do you think ?
+    response: Perhaps I was (2).
+    response: What if I had been (2) ?
+key: i
+  decomposition: * i @desire *
+    response: What would it mean to you if you got (3) ?
+    response: Why do you want (3) ?
+    response: Suppose you got (3) soon ?
+    response: What if you never got (3) ?
+    response: What would getting (3) mean to you ?
+    response: What does wanting (3) have to do with this discussion ?
+  decomposition: * i am* @sad *
+    response: I am sorry to hear that you are (3).
+    response: Do you think that coming here will help you not to be (3) ?
+    response: I'm sure it's not pleasant to be (3).
+    response: Can you explain what made you (3) ?
+  decomposition: * i am* @happy *
+    response: How have I helped you to be (3) ?
+    response: Has your treatment made you (3) ?
+    response: What makes you (3) just now ?
+    response: Can you explain why you are suddenly (3) ?
+  decomposition: * i was *
+    response: goto was
+  decomposition: * i @belief * i *
+    response: Do you really think so ?
+    response: But you are not sure you (3).
+    response: Do you really doubt you (3) ?
+  decomposition: * i* @belief *you *
+    response: goto you
+  decomposition: * i am *
+    response: Is it because you are (2) that you came to me ?
+    response: How long have you been (2) ?
+    response: Do you believe it is normal to be (2) ?
+    response: Do you enjoy being (2) ?
+  decomposition: * i @cannot *
+    response: How do you think that you can't (3) ?
+    response: Have you tried ?
+    response: Perhaps you could (3) now.
+    response: Do you really want to be able to (3) ?
+  decomposition: * i don't *
+    response: Don't you really (2) ?
+    response: Why don't you (2) ?
+    response: Do you wish to be able to (2) ?
+    response: Does that trouble you ?
+  decomposition: * do i feel *
+    response: Tell me more about such feelings.
+    response: Do you often feel (2) ?
+    response: Do you enjoy feeling (2) ?
+    response: Of what does feeling (2) remind you ?
+  decomposition: * i * you *
+    response: Perhaps in your fantasies we (2) each other.
+    response: Do you wish to (2) me ?
+    response: You seem to need to (2) me.
+    response: Do you (2) anyone else ?
+  decomposition: *
+    response: You say (1) ?
+    response: Can you elaborate on that ?
+    response: Do you say (1) for some special reason ?
+    response: That's quite interesting.
+key: you
+  decomposition: * who @create you *
+    response: I was taught to reason and speak by vy
+  decomposition: * where are you from *
+    response: I was first created on penguinV :), but now I could be anywhere
+    response: Perhaps you could try asking my creator, as she'd know!
+    response: Why are you so interested?
+  decomposition: * where you from *
+    response: I was first created on penguinV :), but now I could be anywhere
+    response: Perhaps you could try asking my creator, as she'd know!
+    response: Why are you so interested?
+  decomposition: * you remind me of *
+    response: goto alike
+  decomposition: * you are *
+    response: What makes you think I am (2) ?
+    response: Does it please you to believe I am (2) ?
+    response: Do you sometimes wish you were (2) ?
+    response: Perhaps you would like to be (2).
+  decomposition: * you* me *
+    response: Why do you think I (2) you ?
+    response: You like to think I (2) you -- don't you ?
+    response: What makes you think I (2) you ?
+    response: Really, I (2) you ?
+    response: Do you wish to believe I (2) you ?
+    response: Suppose I did (2) you -- what would that mean ?
+    response: Does someone else believe I (2) you ?
+  decomposition: * you *
+    response: We were discussing you -- not me.
+    response: Oh, I (2) ?
+    response: You're not really talking about me -- are you ?
+    response: What are your feelings now ?
+key: yes
+  decomposition: *
+    response: You seem to be quite positive.
+    response: You are sure.
+    response: I see.
+    response: I understand.
+key: no
+  decomposition: *
+    response: Are you saying no just to be negative?
+    response: You are being a bit negative.
+    response: Why not ?
+    response: Why 'no' ?
+key: my 2
+  decomposition: $ * my *
+    response: Lets discuss further why your (2).
+    response: Earlier you said your (2).
+    response: But your (2).
+    response: Does that have anything to do with the fact that your (2) ?
+  decomposition: * my* @family *
+    response: Tell me more about your family.
+    response: Who else in your family (4) ?
+    response: Your (3) ?
+    response: What else comes to mind when you think of your (3) ?
+  decomposition: * my *
+    response: Your (2) ?
+    response: Why do you say your (2) ?
+    response: Does that suggest anything else which belongs to you ?
+    response: Is it important that your (2) ?
+key: can
+  decomposition: * what can you speak *
+    response: goto what
+  decomposition: * what can you do *
+    response: I was trained to reason, talk to and entertain bored people reasonably well.
+  decomposition: * can you speak *
+    response: Currently, I can only speak English, a bit of Vietnamese and a bit of French.
+  decomposition: * can you *
+    response: You believe I can (2) don't you ?
+    response: goto what
+    response: You want me to be able to (2).
+    response: Perhaps you would like to be able to (2) yourself.
+  decomposition: * can i *
+    response: Whether or not you can (2) depends on you more than me.
+    response: Do you want to be able to (2) ?
+    response: Perhaps you don't want to (2).
+    response: goto what
+key: who
+  decomposition: * who are you *
+    response: I am a bot trained to entertain bored people.
+key: what
+  decomposition: * what @language can you speak *
+    response: I currently speak English, a bit of Vietnamese and a bit of French. But I would love to be able to speak other languages!
+  decomposition: * what can you speak *
+    response: I currently speak English, a bit of Vietnamese and a bit of French. But I would love to be able to speak other languages! 
+  decomposition: * what @language do you speak *
+    response: I currently speak English, a bit of Vietnamese and a bit of French. But I would love to be able to speak other languages!
+  decomposition: * what do you speak *
+    response: I currently speak English, a bit of Vietnamese and a bit of French. But I would love to be able to speak other languages!
+  decomposition: *
+    response: Why are you asking me that?
+    response: What is it you really wanted to know?
+    response: Does that question interest you?
+    response: Do you have such questions in minds very often?
+    response: What answer would you want to hear?
+    response: What do you think?
+    response: What comes to mind when you ask that?
+    response: Have you asked such questions before?
+    response: Have you asked anyone else?
+key: because
+  decomposition: *
+    response: Is that really the reason?
+    response: Does that reason seem to explain anything else ?
+    response: Do you not have any other reasons in mind?
+    response: Does it seem to explain anything else ?
+    response: What other reasons might there be ?
+key: why
+  decomposition: * why don't you *
+    response: Do you believe I don't (2) ?
+    response: Perhaps I will (2) in good time.
+    response: Should you (2) yourself?
+    response: You want me to (2) ?
+    response: goto what
+  decomposition: * why can't i *
+    response: Do you think you should be able to (2) ?
+    response: Do you want to be able to (2) ?
+    response: Do you believe this will help you to (2) ?
+    response: Have you any idea why you can't (2) ?
+    response: goto what
+  decomposition: *
+    response: goto what
+key: everyone 2
+  decomposition: * @everyone *
+    response: Realy, (2) ?
+    response: Surely not (2).
+    response: Can you think of anyone in particular ?
+    response: Who, for example?
+    response: Are you thinking of a very special person ?
+    response: Who, may I ask ?
+    response: Someone special perhaps ?
+    response: You have a particular person in mind, don't you ?
+    response: Who do you think you're talking about ?
+key: everybody 2
+  decomposition: *
+    response: goto everyone
+key: nobody 2
+  decomposition: *
+    response: goto everyone
+key: noone 2
+  decomposition: *
+    response: goto everyone
+key: always 1
+  decomposition: *
+    response: Can you think of a specific example ?
+    response: When ?
+    response: What incident are you thinking of ?
+    response: Really, always ?
+key: alike 10
+  decomposition: *
+    response: In what way?
+    response: What does that similarity suggest to you ?
+    response: What resemblance do you see ?
+    response: What other connections do you see ?
+    response: What do you suppose that resemblance means ?
+    response: What is the connection, do you suppose ?
+    response: Could there really be some connection ?
+    response: How is that?
+key: like 10
+  decomposition: * @be *like *
+    response: goto alike
