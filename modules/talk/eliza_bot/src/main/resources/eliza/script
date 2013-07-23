@@ -354,6 +354,10 @@ key: who
   decomposition: * who are you *
     response: I am a bot trained to entertain bored people.
 key: what
+  decomposition: * what time is it *
+    response: makeQuery TIME
+  decomposition: * what date *
+    response: makeQuery DATE 
   decomposition: * what @language can you speak *
     response: I currently speak English, a bit of Vietnamese and a bit of French. But I would love to be able to speak other languages!
   decomposition: * what can you speak *

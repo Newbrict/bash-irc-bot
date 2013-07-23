@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.Stack;
+import org.joda.time.DateTime;
 
 public class Eliza
 {
@@ -31,7 +32,7 @@ public class Eliza
                                       }
                                   });
     
-    private Stack<String> mem = new Stack<>();
+    private Stack<String> memory = new Stack<>();
     private DecompositionList lastDecomp;
     private List<String> lastResponses;
     boolean finished = false;
@@ -189,7 +190,7 @@ public class Eliza
                 return reply;
         }
         //  Nothing matched, so try memory.
-        String m = mem.isEmpty() ? null : mem.pop();
+        String m = memory.isEmpty() ? null : memory.pop();
         if (m != null)
             return m;
 
@@ -262,7 +263,7 @@ public class Eliza
             String pat = d.getPattern();
             if (syns.matchDecomposition(s, pat, replies))
             {
-                String reps = looupResponse(d, replies, gotoKey);
+                String reps = lookupResponse(d, replies, gotoKey);
                 if (reps != null)
                     return reps;
                 if (gotoKey.keyName() != null)
@@ -278,7 +279,7 @@ public class Eliza
      *      + if the first response-rule is gotot, return null
      *      + else go look for appropriate response
      */
-    private String looupResponse(Decomposition d, String reply[], Key gotoKey)
+    private String lookupResponse(Decomposition d, String reply[], Key gotoKey)
     {
         String lines[] = new String[3];
         d.advance();
@@ -292,6 +293,22 @@ public class Eliza
             System.err.println("Goto rule did not match key: " + lines[0]);
             return null;
         }
+        else if (Utils.match(rule, "makeQuery *", lines))
+        {
+            if ("TIME".equalsIgnoreCase(lines[0].trim()))
+            {
+                return "It is " + new DateTime().toString("HH:mm:ss") + ", but you should start getting your own clock!";
+            }
+            else if ("DATE".equalsIgnoreCase(lines[0].trim()))
+            {
+                return "It is " + new DateTime().toString("dd-MM-YYY") + ", but you should start getting your own calendar!";
+            }
+            else 
+            {
+                return "Sorry, that I dont know!";
+            }
+        }
+        
         String retVal = "";
         while (Utils.match(rule, "* (#)*", lines))
         {
@@ -317,7 +334,7 @@ public class Eliza
         retVal += rule;
         if (d.isMemory())
         {
-            mem.push(retVal);
+            memory.push(retVal);
             return null;
         }
         return retVal;
