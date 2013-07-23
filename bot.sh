@@ -47,7 +47,7 @@ do
       com=$(echo "$will" | cut -d " " -f1)
       if [ -z "$(ls modules/ | grep -i -- "$com")" ]
       then
-        ./modules/help.sh $who $from >> $input
+        ./modules/help/help.sh $who $from >> $input
         continue
       fi
       ./modules/$com/$com.sh $who $from $(echo "$will" | cut -d " " -f2-99) >> $input
