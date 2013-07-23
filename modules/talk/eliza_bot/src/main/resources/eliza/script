@@ -54,6 +54,13 @@ key: sorry
 key: apologise
   decomposition: *
     response: goto sorry
+key: butt
+  decomposition: *
+     response: Would you mind keeping this conversation professional?
+     response: Please watch your language.
+key: fuck
+  decomposition: *
+    response: goto butt
 key: remember 5
   decomposition: * i remember *
     response: Do you often think of (2) ?
