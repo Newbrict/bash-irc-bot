@@ -31,12 +31,14 @@ public class Utils
             URL json = new URL(WEATHER);
 
             JSONObject jsonObj = (JSONObject) JSONValue.parse(new InputStreamReader(json.openStream()));
+            JSONObject currentObs = (JSONObject) jsonObj.get("current_observation");
+            
+            String temp = currentObs.get("temperature_string").toString();
+            String feelsLike = currentObs.get("feelslike_string").toString();
+            String w = currentObs.get("weather").toString();
+            String loc = ((JSONObject) currentObs.get("display_location")).get("full").toString();
 
-            String temp = ((JSONObject) jsonObj.get("current_observation")).get("temperature_string").toString();
-            String w = ((JSONObject) jsonObj.get("current_observation")).get("weather").toString();
-            String loc = ((JSONObject) ((JSONObject) jsonObj.get("current_observation")).get("display_location")).get("full").toString();
-
-            return temp + ", " + w + " in " + loc;
+            return temp + " [feels like " + feelsLike + "], " + w + " in " + loc;
         }
         catch (MalformedURLException ex)
         {
