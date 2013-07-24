@@ -2,12 +2,15 @@
 
 . bot.properties
 input=".bot.cfg"
+echo "Starting session: $(date "+[%y:%m:%d %T]")">$log 
 echo "NICK $nick" > $input 
 echo "USER $user" >> $input
 echo "JOIN #$channel" >> $input
 
 tail -f $input | telnet $server 6667 | while read res
 do
+  # log the session
+  echo "$(date "+[%y:%m:%d %T]")$res" >> $log
   # do things when you see output
   case "$res" in
     # respond to ping requests from the server
@@ -19,8 +22,7 @@ do
       echo "JOIN #$channel" >> $input
     ;;
     # run when someone joins
-    *JOIN*)
-      who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
+    *JOIN*) who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
       if [ "$who" = "$nick" ]
       then
        continue 
@@ -41,13 +43,14 @@ do
         will=$(echo "$res" | perl -pe "s/.*$nick :(.*)/\1/")
         from=$who
       fi
-      com=$(echo "$will" | grep -Eio "[a-z]*" | head -n1 | tail -n1)
-      if [ -z "$(ls modules/*.sh | grep -i -- "$com.sh")" ]
+      will=$(echo "$will" | perl -pe "s/^ //")
+      com=$(echo "$will" | cut -d " " -f1)
+      if [ -z "$(ls modules/ | grep -i -- "$com")" ]
       then
-        ./modules/help.sh $who $from >> $input
+        ./modules/help/help.sh $who $from >> $input
         continue
       fi
-      ./modules/$com.sh $who $from $(echo "$will" | cut -d " " -f2-99) >> $input
+      ./modules/$com/$com.sh $who $from $(echo "$will" | cut -d " " -f2-99) >> $input
     ;;
     *)
       echo "$res"
