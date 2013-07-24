@@ -440,6 +440,8 @@ key: always 1
     response: What incident are you thinking of ?
     response: Really, always ?
 key: alike 10
+  decomposition: * what is the weather like *
+    response: makeQuery WEATHER
   decomposition: *
     response: In what way?
     response: What does that similarity suggest to you ?
