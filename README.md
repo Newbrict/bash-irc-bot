@@ -10,6 +10,6 @@ For example,
 `botnickname: test optional`
 
 will run `test.sh` with the arguments
-    $1 = your nick
-    $2 = from where it came (room/channel)
-    $3-X the rest of the args
+    `$1 = your nick`
+    `$2 = from where it came (room/channel)`
+    `$3-X the rest of the args`
