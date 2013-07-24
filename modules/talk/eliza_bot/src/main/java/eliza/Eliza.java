@@ -1,15 +1,10 @@
 package eliza;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
-import java.util.Stack;
-import org.joda.time.DateTime;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Eliza
 {
@@ -298,11 +293,11 @@ public class Eliza
         {
             if ("TIME".equalsIgnoreCase(lines[0].trim()))
             {
-                return "It is " + new DateTime().toString("HH:mm:ss") + ", but you should start getting your own clock!";
+                return "It is " + Utils.getCurrentTime() + ", but you should start getting your own clock!";
             }
             else if ("DATE".equalsIgnoreCase(lines[0].trim()))
             {
-                return "It is " + new DateTime().toString("dd-MM-YYY") + ", but you should start getting your own calendar!";
+                return "It is " + Utils.getCurrentDate() + ", but you should get your own calendar!";
             }
             else if ("WEATHER".equalsIgnoreCase(lines[0].trim()))
             {

@@ -322,10 +322,10 @@ key: yes
     response: I understand.
 key: no
   decomposition: *
+    response: Why 'no'?
     response: Are you saying no just to be negative?
     response: You are being a bit negative.
-    response: Why not ?
-    response: Why 'no' ?
+    response: Why not?
 key: my 2
   decomposition: $ * my *
     response: Lets discuss further why your (2).
