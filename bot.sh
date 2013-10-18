@@ -45,7 +45,7 @@ do
       fi
       will=$(echo "$will" | perl -pe "s/^ //")
       com=$(echo "$will" | cut -d " " -f1)
-      if [ -z "$(ls modules/ | grep -i -- "$com")" ]
+      if [ -z "$(ls modules/ | grep -i -- "$com")" ] || [ -z "$com" ]
       then
         ./modules/help/help.sh $who $from >> $input
         continue
